@@ -1,5 +1,11 @@
 // Take input from the user via prompt
-let playerSelection = prompt('Choose rock, paper, or scissors', '');
+let playerSelection;
+
+function playerPrompt(){
+    playerSelection = prompt('Choose rock, paper, or scissors', '');
+    playerSelection = playerSelection.trim().toLowerCase();
+};
+
 
 // Randomly generate a response from the computer
 let computerSelection;
@@ -17,25 +23,39 @@ function computerPlay() {
 };
 
 // Comapre users answer vs computer and declare winner
-function playGame() {
-    if (computerSelection == 'rock' && playerSelection == 'scissors') {
-        console.log('The computer wins!');
-    } else if (computerSelection == 'rock' && playerSelection == 'scissors') {
-        console.log('The computer wins!');
-    } else if (computerSelection == 'scissors' && playerSelection == 'paper') {
-        console.log('The computer wins!');
-    } else if (computerSelection == 'paper' && playerSelection == 'rock') {
-        console.log('The computer wins!');
-    } else if (computerSelection ==  playerSelection) {
-        console.log('It was a draw');
-    }
-      else {
-        console.log('You win!');
-    }
-};
-
-computerPlay();
-playGame();
-
-
 // Record score until computer or player reaches 5 wins and display winner
+function game() { 
+        let result;
+        let playerScore = 0;
+        let computerScore = 0;
+        
+        function playGame () {
+
+            if (computerSelection == 'rock' && playerSelection == 'scissors') {
+                computerScore++; 
+                result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
+            } else if (computerSelection == 'rock' && playerSelection == 'scissors') {
+                computerScore++;
+                result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
+            } else if (computerSelection == 'scissors' && playerSelection == 'paper') {
+                computerScore++;
+                result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
+            } else if (computerSelection == 'paper' && playerSelection == 'rock') {
+                computerScore++;
+                result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
+            } else if (computerSelection ==  playerSelection) {
+                result = `You both chose ${computerSelection}. It's a draw. The score is ${playerScore} to ${computerScore}.`;
+            } else {
+                playerScore++;
+                result = `You win, ${playerSelection} beats ${computerSelection}. The score is ${playerScore} to ${computerScore}.`;
+            }
+        }
+        for (let i = 0; i <=4; i++){
+            playerPrompt();
+            computerPlay();
+            playGame();
+            console.log(result);
+        }   
+    };
+    
+game();
