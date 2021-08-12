@@ -1,5 +1,5 @@
 // Take input from the user via prompt
-let playerSelection;
+let playerSelection; 
 
 function playerPrompt(){
     playerSelection = prompt('Choose rock, paper, or scissors', '');
