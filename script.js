@@ -1,18 +1,8 @@
 // Take input from the user via prompt
 let playerSelection; 
+let playerScore = 0;
+let computerScore = 0;
 
-const buttons = document.querySelectorAll(".btn");
-buttons.forEach(button => button.addEventListener('click' , playerPrompt));
-const resultText = document.querySelector('#results');
-
-function playerPrompt(e){
-    playerSelection = `${e.originalTarget.innerText.trim().toLowerCase()}`;
-    console.log(playerSelection)
-};
-
-
-
-// Randomly generate a response from the computer
 let computerSelection;
 
 function computerPlay() {
@@ -27,39 +17,59 @@ function computerPlay() {
     }
 };
 
+// query selectors 
+const buttons = document.querySelectorAll(".btn");
+const resultText = document.querySelector('#results');
+const pScoreText = document.querySelector('#player-score');
+const cScoreText = document.querySelector('#computer-score');
+
+//update score
+cScoreText.innerText = " " + computerScore;
+pScoreText.innerText = " " + playerScore;
+function updateScore() {
+    cScoreText.innerText = " " + computerScore;
+    pScoreText.innerText = " " + playerScore;
+}
+
+//event listeners
+buttons.forEach(button => button.addEventListener('click' , playRound));
+
+function playRound(e){
+    playerSelection = `${e.originalTarget.innerText.trim().toLowerCase()}`;
+    
+    computerPlay();
+
+    if (computerSelection == 'rock' && playerSelection == 'scissors') {
+        computerScore++; 
+        result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
+    } else if (computerSelection == 'rock' && playerSelection == 'scissors') {
+        computerScore++;
+        result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
+    } else if (computerSelection == 'scissors' && playerSelection == 'paper') {
+        computerScore++;
+        result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
+    } else if (computerSelection == 'paper' && playerSelection == 'rock') {
+        computerScore++;
+        result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
+    } else if (computerSelection ==  playerSelection) {
+        result = `You both chose ${computerSelection}. It's a draw. The score is ${playerScore} to ${computerScore}.`;
+    } else {
+        playerScore++;
+        result = `You win, ${playerSelection} beats ${computerSelection}. The score is ${playerScore} to ${computerScore}.`;
+    }
+    resultText.innerText = result;
+    updateScore();
+};
+
+
+
+
+// Randomly generate a response from the computer
+
+
 // Comapre users answer vs computer and declare winner
 // Record score until computer or player reaches 5 wins and display winner
-function game() { 
-        let result;
-        let playerScore = 0;
-        let computerScore = 0;
-        
-        function playGame () {
-
-            if (computerSelection == 'rock' && playerSelection == 'scissors') {
-                computerScore++; 
-                result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
-            } else if (computerSelection == 'rock' && playerSelection == 'scissors') {
-                computerScore++;
-                result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
-            } else if (computerSelection == 'scissors' && playerSelection == 'paper') {
-                computerScore++;
-                result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
-            } else if (computerSelection == 'paper' && playerSelection == 'rock') {
-                computerScore++;
-                result = `You lose, ${computerSelection} beats ${playerSelection}. The score is ${playerScore} to ${computerScore}.`;
-            } else if (computerSelection ==  playerSelection) {
-                result = `You both chose ${computerSelection}. It's a draw. The score is ${playerScore} to ${computerScore}.`;
-            } else {
-                playerScore++;
-                result = `You win, ${playerSelection} beats ${computerSelection}. The score is ${playerScore} to ${computerScore}.`;
-            }
-        }
-
-            computerPlay();
-            playGame();
-            console.log(result);
-        
-    };
+/*
     
 game();
+*/
