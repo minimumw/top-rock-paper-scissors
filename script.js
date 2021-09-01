@@ -1,10 +1,15 @@
 // Take input from the user via prompt
 let playerSelection; 
 
-function playerPrompt(){
-    playerSelection = prompt('Choose rock, paper, or scissors', '');
-    playerSelection = playerSelection.trim().toLowerCase();
+const buttons = document.querySelectorAll(".btn");
+buttons.forEach(button => button.addEventListener('click' , playerPrompt));
+const resultText = document.querySelector('#results');
+
+function playerPrompt(e){
+    playerSelection = `${e.originalTarget.innerText.trim().toLowerCase()}`;
+    console.log(playerSelection)
 };
+
 
 
 // Randomly generate a response from the computer
@@ -50,12 +55,11 @@ function game() {
                 result = `You win, ${playerSelection} beats ${computerSelection}. The score is ${playerScore} to ${computerScore}.`;
             }
         }
-        for (let i = 0; i <=4; i++){
-            playerPrompt();
+
             computerPlay();
             playGame();
             console.log(result);
-        }   
+        
     };
     
 game();
