@@ -1,21 +1,8 @@
-// Take input from the user via prompt
+// variables
 let playerSelection; 
+let computerSelection;
 let playerScore = 0;
 let computerScore = 0;
-
-let computerSelection;
-
-function computerPlay() {
-    let computerRandom = (Math.floor(Math.random() * 3));
-
-    if (computerRandom === 1) {
-        computerSelection = 'rock';
-    } else if (computerRandom === 2) {
-        computerSelection = 'paper';
-    } else {
-        computerSelection = 'scissors';
-    }
-};
 
 // query selectors 
 const buttons = document.querySelectorAll(".btn");
@@ -26,7 +13,7 @@ const buttonDiv = document.querySelector('.buttons');
 const retryButton = document.createElement('button');
 retryButton.innerHTML = "Play Again";
 
-//update score
+// update score
 cScoreText.innerText = " " + computerScore;
 pScoreText.innerText = " " + playerScore;
 function updateScore() {
@@ -34,7 +21,19 @@ function updateScore() {
     pScoreText.innerText = " " + playerScore;
 }
 
-// game over
+// functions
+function computerPlay() {
+    let computerRandom = (Math.floor(Math.random() * 3));
+
+    if (computerRandom === 1) {
+        computerSelection = 'rock';
+    } else if (computerRandom === 2) {
+        computerSelection = 'paper';
+    } else {
+        computerSelection = 'scissors';
+    }
+}
+
 function gameOver() {
     if (playerScore == 5){
         result = "Congratulations, you're the winner!";
@@ -51,13 +50,13 @@ function endState(){
 }
     
 
-//event listeners
+// event listeners
 buttons.forEach(button => button.addEventListener('click' , playRound));
 retryButton.addEventListener('click', function(){
     location.reload();
 });
 
-
+// game logic
 function playRound(e){
     playerSelection = `${e.originalTarget.innerText.trim().toLowerCase()}`;
     
@@ -86,16 +85,3 @@ function playRound(e){
     resultText.innerText = result;
     
 };
-
-
-
-
-// Randomly generate a response from the computer
-
-
-// Comapre users answer vs computer and declare winner
-// Record score until computer or player reaches 5 wins and display winner
-/*
-    
-game();
-*/
