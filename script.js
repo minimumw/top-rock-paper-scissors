@@ -22,6 +22,9 @@ const buttons = document.querySelectorAll(".btn");
 const resultText = document.querySelector('#results');
 const pScoreText = document.querySelector('#player-score');
 const cScoreText = document.querySelector('#computer-score');
+const buttonDiv = document.querySelector('.buttons');
+const retryButton = document.createElement('button');
+retryButton.innerHTML = "Play Again";
 
 //update score
 cScoreText.innerText = " " + computerScore;
@@ -31,8 +34,29 @@ function updateScore() {
     pScoreText.innerText = " " + playerScore;
 }
 
+// game over
+function gameOver() {
+    if (playerScore == 5){
+        result = "Congratulations, you're the winner!";
+        endState();
+    } else if (computerScore == 5){
+        result = "Sorry, you're a loser."; 
+        endState();
+    } else return
+}
+
+function endState(){
+    buttons.forEach(button => button.remove());
+    buttonDiv.appendChild(retryButton);
+}
+    
+
 //event listeners
 buttons.forEach(button => button.addEventListener('click' , playRound));
+retryButton.addEventListener('click', function(){
+    location.reload();
+});
+
 
 function playRound(e){
     playerSelection = `${e.originalTarget.innerText.trim().toLowerCase()}`;
@@ -57,8 +81,10 @@ function playRound(e){
         playerScore++;
         result = `You win, ${playerSelection} beats ${computerSelection}. The score is ${playerScore} to ${computerScore}.`;
     }
-    resultText.innerText = result;
     updateScore();
+    gameOver();
+    resultText.innerText = result;
+    
 };
 
 
